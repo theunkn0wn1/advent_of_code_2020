@@ -3,7 +3,6 @@ use std::io::{self, BufRead};
 use std::path::Path;
 use anyhow::Result;
 use rayon::prelude::*;
-use std::sync::mpsc::channel;
 
 fn do_read() -> Result<Vec<i32>> {
     let mut numbers: Vec<i32> = Vec::new();
@@ -20,7 +19,13 @@ fn do_read() -> Result<Vec<i32>> {
 
 fn main() -> Result<()> {
     let numbers = do_read()?;
-    let result = numbers.par_iter().for_each(
+    numbers2(numbers);
+
+    Ok(())
+}
+
+fn numbers2(numbers: Vec<i32>) {
+    numbers.par_iter().for_each(
         |x| {
             numbers.par_iter().filter(|y| { x + *y == 2020 }).for_each(|y| {
                 println!("{} + {} = {}", x, y, x + y);
@@ -28,8 +33,6 @@ fn main() -> Result<()> {
             });
         }
     );
-
-    Ok(())
 }
 
 // The output is wrapped in a Result to allow matching on errors
