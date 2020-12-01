@@ -19,8 +19,12 @@ fn do_read() -> Result<Vec<i32>> {
 
 fn main() -> Result<()> {
     let numbers = do_read()?;
-    numbers2(numbers);
 
+    println!("=== part one ===");
+    numbers2(numbers.clone());
+    println!("--- part two ---");
+    numbers3(numbers);
+    println!("Done.");
     Ok(())
 }
 
@@ -31,6 +35,19 @@ fn numbers2(numbers: Vec<i32>) {
                 println!("{} + {} = {}", x, y, x + y);
                 println!("{} * {} = {}", x, y, x * y);
             });
+        }
+    );
+}
+
+fn numbers3(numbers: Vec<i32>) {
+    numbers.par_iter().for_each(
+        |x| {
+            numbers.par_iter().for_each(|y| {
+                numbers.par_iter().filter(|z| { x + y + *z == 2020 }).for_each(|z| {
+                    println!("{} + {} + {} = {}", x, y, z, x + z);
+                    println!("{} * {} * {}= {}", x, y, z, x * y * z);
+                });
+            })
         }
     );
 }
