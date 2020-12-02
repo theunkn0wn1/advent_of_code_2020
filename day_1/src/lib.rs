@@ -33,17 +33,18 @@ pub fn numbers2(numbers: Vec<i32>) -> Option<i32> {
     result.next().unwrap()
 }
 
-pub fn numbers3(numbers: Vec<i32>) {
-    numbers.iter().for_each(
-        |x| {
-            numbers.iter().for_each(|y| {
-                numbers.iter().filter(|z| { x + y + *z == 2020 }).for_each(|z| {
-                    //println!("{} + {} + {} = {}", x, y, z, x + z);
-                    //println!("{} * {} * {}= {}", x, y, z, x * y * z);
-                });
-            })
+pub fn numbers3(numbers: Vec<i32>) -> Option<i32> {
+    for x in numbers.iter(){
+        for y in numbers.iter(){
+            for z in numbers.iter(){
+                if x+y+z == 2020 {
+                    return Some(x*y*z);
+                }
+            }
         }
-    );
+    }
+
+    return None;
 }
 
 // The output is wrapped in a Result to allow matching on errors

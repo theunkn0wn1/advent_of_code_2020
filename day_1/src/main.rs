@@ -7,7 +7,8 @@ fn main() -> anyhow::Result<()> {
     let result = numbers2(numbers.clone());
     println!("{:?}", result);
     println!("--- part two ---");
-    numbers3(numbers);
+    let result = numbers3(numbers);
+    println!("{:?}", result);
     println!("Done.");
     Ok(())
 }
