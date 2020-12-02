@@ -4,7 +4,8 @@ fn main() -> anyhow::Result<()> {
     let numbers = do_read()?;
 
     println!("=== part one ===");
-    numbers2(numbers.clone());
+    let result = numbers2(numbers.clone());
+    println!("{:?}", result);
     println!("--- part two ---");
     numbers3(numbers);
     println!("Done.");
