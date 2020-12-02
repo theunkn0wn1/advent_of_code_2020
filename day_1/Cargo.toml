@@ -9,3 +9,8 @@ edition = "2018"
 [dependencies]
 anyhow = "1.0.34"
 rayon = "1.5.0"
+criterion = "0.3.3"
+
+[[bench]]
+name = "numbers2"
+harness = false
