@@ -12,7 +12,7 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn solve() -> anyhow::Result<u32> {
-    let lines = read_lines("sample.txt")?;
+    let lines = read_lines("input.txt")?;
     let lines = lines.collect::<Result<Vec<_>, _>>()?;
     let mut total_passing: u32 = 0;
 
