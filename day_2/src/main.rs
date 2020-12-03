@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use anyhow;
 
 use day_1::read_lines;
