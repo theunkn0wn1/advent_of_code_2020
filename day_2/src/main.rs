@@ -9,12 +9,12 @@ fn main() -> anyhow::Result<()> {
     let line_reader = read_lines("input.txt")?;
     let lines = line_reader.collect::<Result<Vec<_>, _>>()?;
 
-    let solution = solve(lines)?;
+    let solution = solve_p2(lines)?;
     println!("total passing {:?}", solution);
     Ok(())
 }
 
-fn solve(lines: Vec<String>) -> anyhow::Result<u32> {
+fn solve_p1(lines: Vec<String>) -> anyhow::Result<u32> {
 
     let mut total_passing: u32 = 0;
 
@@ -32,6 +32,27 @@ fn solve(lines: Vec<String>) -> anyhow::Result<u32> {
                         total_passing += 1;
                     }
                 }
+            }
+            Err(e) => { anyhow::bail!("{}", e) }
+        }
+    }
+
+    Ok(total_passing)
+}
+
+fn solve_p2(lines: Vec<String>) -> anyhow::Result<u32> {
+
+    let mut total_passing: u32 = 0;
+
+    for line in lines.iter() {
+        match day_2::parse_line(&line) {
+            Ok((_remainder, constraint)) => {
+                let char_minimum: char = line.chars().nth((constraint.minimum+1).into()).unwrap();
+                let char_maximum: char = line.chars().nth((constraint.maximum+1).into()).unwrap();
+                if (char_maximum == constraint.subject.into()) ^ (char_minimum == constraint.subject.into()){
+                    total_passing += 1;
+                }
+
             }
             Err(e) => { anyhow::bail!("{}", e) }
         }
