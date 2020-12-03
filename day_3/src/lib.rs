@@ -24,9 +24,9 @@ pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize
     let mut collisions: usize = 0;
 
     let mut row_iter = maze.iter();
-    println!("length of row_iter := {:?}", row_iter.len());
+    // println!("length of row_iter := {:?}", row_iter.len());
     let row = row_iter.nth(dy).unwrap();
-    println!("accessing [{:?}][{:?}]", y, x % row.len());
+    // println!("accessing [{:?}][{:?}]", y, x % row.len());
     if row.chars().nth(x % row.len()).unwrap() == '#' {
         collisions += 1;
     }
@@ -34,7 +34,7 @@ pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize
     while let Some(row) = row_iter.nth(dy - 1) {
         x += dx;
         y += dy;
-        println!("accessing [{:?}][{:?}]", y, x % row.len());
+        // println!("accessing [{:?}][{:?}]", y, x % row.len());
         if row.chars().nth(x % row.len()).unwrap() == '#' {
             collisions += 1;
         }

@@ -11,3 +11,10 @@ anyhow = "1.0.34"
 
 [dependencies.day_1]
 path = "../day_1"
+
+[dev-dependencies]
+criterion = "0.3.3"
+
+[[bench]]
+name = "day3"
+harness = false
