@@ -24,13 +24,17 @@ pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize
     let mut collisions: usize = 0;
 
     let mut row_iter = maze.iter();
+
+    // The first row needs to be done manually, to prevent off-by-one errors that
+    // produce off by a lot errors down the line
+
     // println!("length of row_iter := {:?}", row_iter.len());
     let row = row_iter.nth(dy).unwrap();
     // println!("accessing [{:?}][{:?}]", y, x % row.len());
     if row.chars().nth(x % row.len()).unwrap() == '#' {
         collisions += 1;
     }
-
+    // for the rest, simply loop til EOF.
     while let Some(row) = row_iter.nth(dy - 1) {
         x += dx;
         y += dy;
