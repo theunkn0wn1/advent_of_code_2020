@@ -6,14 +6,16 @@ use day_1::read_lines;
 use day_2;
 
 fn main() -> anyhow::Result<()> {
-    let solution = solve()?;
+    let line_reader = read_lines("input.txt")?;
+    let lines = line_reader.collect::<Result<Vec<_>, _>>()?;
+
+    let solution = solve(lines)?;
     println!("total passing {:?}", solution);
     Ok(())
 }
 
-fn solve() -> anyhow::Result<u32> {
-    let lines = read_lines("input.txt")?;
-    let lines = lines.collect::<Result<Vec<_>, _>>()?;
+fn solve(lines: Vec<String>) -> anyhow::Result<u32> {
+
     let mut total_passing: u32 = 0;
 
     for line in lines.iter() {
