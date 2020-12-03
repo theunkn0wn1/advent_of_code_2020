@@ -8,7 +8,7 @@ mod tests {
         let line_reader = read_lines("input.txt").unwrap();
         let lines = line_reader.collect::<Result<Vec<_>, _>>().unwrap();
         println!("length of input rows: {:?}", lines.len());
-        let solution1 = solve_p1(lines.clone(), 3, 1).unwrap();
+        let solution1 = solve_p1(&lines, 3, 1).unwrap();
 
 
         assert_eq!(solution1, 167)
@@ -18,12 +18,12 @@ mod tests {
 use anyhow;
 
 
-pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize> {
+pub fn solve_p1(maze: &Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize> {
     let mut x = 0 + dx;
     let mut y = 0 + dy;
     let mut collisions: usize = 0;
 
-    let mut row_iter = maze.iter();
+    let mut row_iter = maze.iter().step_by(dy);
 
     // The first row needs to be done manually, to prevent off-by-one errors that
     // produce off by a lot errors down the line
@@ -35,7 +35,7 @@ pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize
         collisions += 1;
     }
     // for the rest, simply loop til EOF.
-    while let Some(row) = row_iter.nth(dy - 1) {
+    while let Some(row) = row_iter.next(){
         x += dx;
         y += dy;
         // println!("accessing [{:?}][{:?}]", y, x % row.len());
@@ -45,4 +45,8 @@ pub fn solve_p1(maze: Vec<String>, dx: usize, dy: usize) -> anyhow::Result<usize
     }
 
     Ok(collisions)
+}
+
+pub fn solve_p2(maze: Vec<String> ) -> anyhow::Result<usize> {
+    unimplemented!();
 }
