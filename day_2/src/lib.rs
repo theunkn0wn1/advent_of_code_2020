@@ -11,7 +11,6 @@ pub struct Constraint {
 
 fn read_digit(input: &str) -> IResult<&str, u8> {
     let (remainder, token) = character::complete::digit0(input)?;
-    println!("{:?}", remainder);
 
     Ok((remainder, token.parse().unwrap()))
 }

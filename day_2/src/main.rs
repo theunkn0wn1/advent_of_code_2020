@@ -10,7 +10,9 @@ fn main() -> anyhow::Result<()> {
 
     for line in lines.iter() {
         match day_2::parse_line(&line) {
-            Ok((remainder, constraint)) => {}
+            Ok((remainder, constraint)) => {
+                println!("{:?}", constraint)
+            }
             Err(e) => { anyhow::bail!("{}", e) }
         }
     }
