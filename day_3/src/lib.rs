@@ -24,7 +24,6 @@ mod tests {
     }
 }
 
-use anyhow;
 
 pub fn solve_p1(maze: &Vec<String>, dx: usize, dy: usize) -> usize {
     let mut x = 0 + dx;
@@ -52,7 +51,7 @@ pub fn solve_p1(maze: &Vec<String>, dx: usize, dy: usize) -> usize {
             collisions += 1;
         }
     }
-    println!("collisions := {:?}", collisions);
+    // println!("collisions := {:?}", collisions);
     collisions
 }
 

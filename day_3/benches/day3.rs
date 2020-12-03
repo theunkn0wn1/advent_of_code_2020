@@ -1,4 +1,4 @@
-use criterion::{black_box, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main};
 use day_1::read_lines;
 use day_3::{solve_p1, solve_p2};
 
