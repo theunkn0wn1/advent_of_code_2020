@@ -1,19 +1,20 @@
-use day_2;
-use day_1::read_lines;
-use anyhow;
-use day_2::Constraint;
 use std::collections::HashMap;
 
-fn main() -> anyhow::Result<()>{
+use anyhow;
+
+use day_1::read_lines;
+use day_2;
+
+fn main() -> anyhow::Result<()> {
     let solution = solve()?;
-    println!("{:?}", solution);
+    println!("total passing {:?}", solution);
     Ok(())
 }
 
-fn solve() -> anyhow::Result<bool> {
+fn solve() -> anyhow::Result<u32> {
     let lines = read_lines("sample.txt")?;
     let lines = lines.collect::<Result<Vec<_>, _>>()?;
-    let mut total_passing:u32 = 0;
+    let mut total_passing: u32 = 0;
 
     for line in lines.iter() {
         match day_2::parse_line(&line) {
@@ -25,14 +26,14 @@ fn solve() -> anyhow::Result<bool> {
                 }
 
                 if let Some(count) = charmap.get(&constraint.subject) {
-                    return Ok(count >= &constraint.minimum && count <= &constraint.maximum);
-                } else {
-                    return Ok(false);
+                    if count >= &constraint.minimum && count <= &constraint.maximum {
+                        total_passing += 1;
+                    }
                 }
             }
             Err(e) => { anyhow::bail!("{}", e) }
         }
     }
 
-    Ok(false)
+    Ok(total_passing)
 }
