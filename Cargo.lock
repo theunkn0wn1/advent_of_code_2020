@@ -225,6 +225,7 @@ dependencies = [
 name = "day_2"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "day_1",
  "nom",
 ]
