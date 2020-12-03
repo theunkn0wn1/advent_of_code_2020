@@ -1,6 +1,6 @@
 // convenient line reader abstraction
 use nom::{IResult, character};
-
+use std::collections::HashMap;
 #[derive(Debug)]
 pub struct Constraint {
     pub subject: char,
@@ -45,7 +45,52 @@ pub fn parse_line(input: &str) -> IResult<&str, Constraint> {
         password_body: remainder_text
     }))
 }
+pub fn solve_p1(lines: Vec<String>) -> anyhow::Result<u32> {
 
+    let mut total_passing: u32 = 0;
+
+    for line in lines.iter() {
+        match parse_line(&line) {
+            Ok((_remainder, constraint)) => {
+                let mut charmap: HashMap<char, u8> = HashMap::new();
+                for letter in constraint.password_body {
+                    let hash_v = charmap.entry(letter).or_insert(0);
+                    *hash_v += 1;
+                }
+
+                if let Some(count) = charmap.get(&constraint.subject) {
+                    if count >= &constraint.minimum && count <= &constraint.maximum {
+                        total_passing += 1;
+                    }
+                }
+            }
+            Err(e) => { anyhow::bail!("{}", e) }
+        }
+    }
+
+    Ok(total_passing)
+}
+
+pub fn solve_p2(lines: Vec<String>) -> anyhow::Result<u32> {
+
+    let mut total_passing: u32 = 0;
+
+    for line in lines.iter() {
+        match parse_line(&line) {
+            Ok((_remainder, constraint)) => {
+                let char_maximum: char = constraint.password_body[(constraint.maximum-1) as usize];
+                let char_minimum: char = constraint.password_body[(constraint.minimum-1) as usize];
+                if (char_maximum == constraint.subject.into()) ^ (char_minimum == constraint.subject.into()){
+                    total_passing += 1;
+                }
+
+            }
+            Err(e) => { anyhow::bail!("{}", e) }
+        }
+    }
+
+    Ok(total_passing)
+}
 // fn read_constraint(input: &str) -> IResult<&str, Constraint> {
 // }
 #[cfg(test)]
