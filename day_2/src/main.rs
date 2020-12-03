@@ -47,8 +47,8 @@ fn solve_p2(lines: Vec<String>) -> anyhow::Result<u32> {
     for line in lines.iter() {
         match day_2::parse_line(&line) {
             Ok((_remainder, constraint)) => {
-                let char_minimum: char = line.chars().nth((constraint.minimum+1).into()).unwrap();
-                let char_maximum: char = line.chars().nth((constraint.maximum+1).into()).unwrap();
+                let char_maximum: char = constraint.password_body[(constraint.maximum-1) as usize];
+                let char_minimum: char = constraint.password_body[(constraint.minimum-1) as usize];
                 if (char_maximum == constraint.subject.into()) ^ (char_minimum == constraint.subject.into()){
                     total_passing += 1;
                 }
