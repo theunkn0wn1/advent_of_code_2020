@@ -26,7 +26,7 @@ fn read_entries() -> anyhow::Result<()> {
     let element_iter = lines.split(|str| str == "");
     let foo = element_iter.collect_vec();
     for line in foo{
-        let result = process_lines(line)?;
+        let result = convert_entry_to_dict(line)?;
     }
 
     // for element in element_iter{
@@ -36,15 +36,15 @@ fn read_entries() -> anyhow::Result<()> {
     Ok(())
 }
 
-fn process_lines(data: &[String]) -> anyhow::Result<HashMap<&str, &str>> {
+fn convert_entry_to_dict(data: &[String]) -> anyhow::Result<HashMap<&str, &str>> {
     let mut formed_data = HashMap::new();
     println!("--------------");
     for line in data.into_iter() {
-        println!("raw line := {:?}", line);
+        // println!("raw line := {:?}", line);
         for element in line.split_ascii_whitespace(){
-            println!("raw element := {:?}", element);
+            // println!("raw element := {:?}", element);
             for (key, value) in element.split(":").collect_tuple() {
-                println!("key := {:?}\t value = {:?}", key, value);
+                // println!("key := {:?}\t value = {:?}", key, value);
                 formed_data.insert(key, value);
             }
         }
