@@ -41,7 +41,7 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        let validated = solve_p1().expect("failed!");
+        let validated = solve_p1("sample.txt").expect("failed!");
         assert_eq!(validated, 2);
     }
 }
@@ -102,8 +102,8 @@ fn validate_p1(data: HashMap<&str, &str>) -> anyhow::Result<bool> {
     Ok(true)
 }
 
-fn solve_p1() -> anyhow::Result<usize> {
-    let entries = read_entries("sample.txt")?;
+pub fn solve_p1(path: &str) -> anyhow::Result<usize> {
+    let entries = read_entries(path)?;
     let mut valid = 0;
     for entry in entries {
         let entry_dict = convert_entry_to_dict(&entry)?;
