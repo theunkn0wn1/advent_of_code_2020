@@ -1,4 +1,4 @@
-use criterion::{criterion_group, criterion_main, black_box};
+use criterion::{criterion_group, criterion_main};
 use day_1::read_lines;
 use day_2::{solve_p1, solve_p2};
 fn criterion_benchmark(c: &mut criterion::Criterion){

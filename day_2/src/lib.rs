@@ -113,7 +113,7 @@ mod tests {
     #[test]
     fn test_read_constraint() {
         let raw = "1-3 b: cdefg";
-        let (remainder, result) = read_constraint(raw).expect("fail");
+        let (_, result) = read_constraint(raw).expect("fail");
         println!("{:?}", result);
         assert_eq!(result[0], 1);
         assert_eq!(result[1], 3);
@@ -122,7 +122,7 @@ mod tests {
     #[test]
     fn test_parse_line() {
         let raw = "1-3 b: cdefg";
-        let (remainder, result) = parse_line(raw).expect("fail");
+        let (_, result) = parse_line(raw).expect("fail");
         println!("{:?}", result);
 
         assert_eq!(result.maximum, 3);
