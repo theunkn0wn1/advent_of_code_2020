@@ -7,8 +7,10 @@ mod tests {
 
     #[test]
     fn test_parse_row() {
-        let result = parse_row("FBFBBFF");
-        assert_eq!(result, 44);
+        assert_eq!(parse_row("FBFBBFF"), 44);
+        assert_eq!(parse_row("BFFFBBF"), 70);
+        assert_eq!(parse_row("FFFBBBF"), 14);
+        assert_eq!(parse_row("BBFFBBF"), 102);
     }
 }
 
@@ -44,7 +46,6 @@ fn solve_p1() -> anyhow::Result<()> {
     // let data_iter = day_1::read_lines("input.txt")?
     //     .collect::<Result<Vec<_>, _>>()?;
 
-    let seat = parse_row("FBFBBFF");
 
     Ok(())
 }
