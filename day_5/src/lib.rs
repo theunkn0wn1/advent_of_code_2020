@@ -3,7 +3,7 @@ use itertools::Itertools;
 
 #[cfg(test)]
 mod tests {
-    use crate::{parse_row, parse_seat_col};
+    use crate::{parse_row, parse_col};
 
     #[test]
     fn test_parse_row() {
@@ -15,9 +15,9 @@ mod tests {
 
     #[test]
     fn test_parse_col() {
-        assert_eq!(parse_seat_col("RRR"), 7);
-        assert_eq!(parse_seat_col("RLL"), 4);
-        assert_eq!(parse_seat_col("RLR"), 5);
+        assert_eq!(parse_col("RRR"), 7);
+        assert_eq!(parse_col("RLL"), 4);
+        assert_eq!(parse_col("RLR"), 5);
     }
 }
 
@@ -25,6 +25,7 @@ const TOTAL_ROWS: u32 = 127;
 const TOTAL_COLS: u32 = 7;
 
 mod identities;
+mod seat;
 
 fn parse_row(line: &str) -> u32 {
     let mut range_minimum: u32 = 0;
@@ -49,7 +50,7 @@ fn parse_row(line: &str) -> u32 {
     range_maximum
 }
 
-fn parse_seat_col(line: &str) -> u32 {
+fn parse_col(line: &str) -> u32 {
     let mut range_minimum: u32 = 0;
     let mut range_maximum = TOTAL_COLS;
 
