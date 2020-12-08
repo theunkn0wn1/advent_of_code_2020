@@ -41,24 +41,29 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        let validated = solve_p1("sample.txt").expect("failed!");
+        let entries = read_entries("sample.txt").expect("failed to read data");
+        let validated = solve_p1(&entries).expect("failed!");
         assert_eq!(validated, 2);
     }
 
     #[test]
     fn test_p2_invalid() {
-        let validated = solve_p2("invalid.txt").expect("failed!");
+        let entries = read_entries("invalid.txt").expect("failed to read data");
+
+        let validated = solve_p2(&entries).expect("failed!");
         assert_eq!(validated, 0);
     }
 
     #[test]
     fn test_p2_valid() {
-        let validated = solve_p2("valid.txt").expect("failed!");
+        let entries = read_entries("valid.txt").expect("failed to read data");
+
+        let validated = solve_p2(&entries).expect("failed!");
         assert_eq!(validated, 4);
     }
 }
 
-fn read_entries(path: &str) -> anyhow::Result<Vec<Vec<String>>> {
+pub fn read_entries(path: &str) -> anyhow::Result<Vec<Vec<String>>> {
     let handle = File::open(path)?;
     let line_reader = io::BufReader::new(handle).lines();
     let lines = line_reader.collect::<Result<Vec<_>, _>>()?;
@@ -187,8 +192,7 @@ fn validate_p2(data: &HashMap<&str, &str>) -> anyhow::Result<bool> {
 }
 
 
-pub fn solve_p1(path: &str) -> anyhow::Result<usize> {
-    let entries = read_entries(path)?;
+pub fn solve_p1(entries: &Vec<Vec<String>>) -> anyhow::Result<usize> {
     let mut valid = 0;
     for entry in entries {
         let entry_dict = convert_entry_to_dict(&entry)?;
@@ -200,8 +204,7 @@ pub fn solve_p1(path: &str) -> anyhow::Result<usize> {
     Ok(valid)
 }
 
-pub fn solve_p2(path: &str) -> anyhow::Result<usize> {
-    let entries = read_entries(path)?;
+pub fn solve_p2(entries: &Vec<Vec<String>>) -> anyhow::Result<usize> {
     let mut valid = 0;
     for entry in entries {
         let entry_dict = convert_entry_to_dict(&entry)?;
