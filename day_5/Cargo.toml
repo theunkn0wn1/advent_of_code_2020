@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 anyhow = "1.0.34"
 itertools = "0.9.0"
+once_cell = "1.5.2"
 
 [dependencies.day_1]
 path = "../day_1"
