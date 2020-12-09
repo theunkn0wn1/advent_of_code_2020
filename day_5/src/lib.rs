@@ -84,9 +84,8 @@ pub fn solve_p2(data: &Vec<String>) -> Option<u32> {
     let ticket_ids = data.iter()
         .map(|row| seat::Seat::new(&row))
         .map(|ticket| ticket.id);
-
-    let mut ids = ticket_ids.collect_vec();
-    ids.sort();
+    // collect the ticket IDs into a sorted vector.
+    let ids = ticket_ids.sorted().collect_vec();
     #[cfg(debug_assertions)]
     println!("difference := {:?}", ids);
 
