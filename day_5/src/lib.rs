@@ -1,8 +1,5 @@
 use crate::identities::{RowIdentity, SeatIdentity};
-use std::collections::{HashSet};
-use once_cell::sync::Lazy;
 use itertools::Itertools;
-use std::iter::FromIterator;
 
 #[cfg(test)]
 mod tests {
