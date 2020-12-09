@@ -26,11 +26,6 @@ mod tests {
 
 const TOTAL_ROWS: u32 = 127;
 const TOTAL_COLS: u32 = 7;
-static SEATS: Lazy<HashSet<u32>> = Lazy::new(|| {
-    let mut seats = HashSet::new();
-    seats.extend((0..971));
-    seats
-});
 
 mod identities;
 mod seat;
@@ -89,36 +84,24 @@ pub fn solve_p1(data: &Vec<String>) -> anyhow::Result<()> {
     Ok(())
 }
 
-pub fn solve_p2(data: &Vec<String>) -> anyhow::Result<u32> {
+pub fn solve_p2(data: &Vec<String>) -> Option<u32> {
     let ticket_ids = data.iter()
         .map(|row| seat::Seat::new(&row))
         .map(|ticket| ticket.id);
 
-    // compute this up front so we can use it for assertions
-    let ticket_ids_len = ticket_ids.len();
-
+    let mut ids = ticket_ids.collect_vec();
+    ids.sort();
     #[cfg(debug_assertions)]
-    println!("ticket_ids.len() := {:?}", ticket_ids_len);
-
-    // instantiate a new hashset
-    let mut tickets_set: HashSet<u32> = HashSet::from_iter(ticket_ids);
-
-    debug_assert!(tickets_set.len() == ticket_ids_len);
-
-
-    let mut intersection = SEATS.difference(&tickets_set).collect_vec();
-    intersection.sort();
-    #[cfg(debug_assertions)]
-    println!("difference := {:?}", intersection);
+    println!("difference := {:?}", ids);
 
     let mut previous = 0;
-    for id in intersection {
+    for id in ids {
         let delta = id - previous;
-        if delta != 1 {
-            println!("found delta of {} := {}->{}", delta, previous, id)
+        if delta == 2 {
+            return Some(previous + 1);
         }
-        previous = *id;
+        previous = id;
     }
 
-    Ok(0)
+    None
 }

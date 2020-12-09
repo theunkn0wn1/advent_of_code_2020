@@ -5,6 +5,10 @@ fn main() -> anyhow::Result<()> {
         .collect::<Result<Vec<_>, _>>()?;
 
     solve_p1(&data)?;
-    solve_p2(&data)?;
+    if let Some(solution) = solve_p2(&data) {
+        println!("Part 2 := {}", solution);
+    } else {
+        println!("Part 2 : No solution.")
+    }
     Ok(())
 }
