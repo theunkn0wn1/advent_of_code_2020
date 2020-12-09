@@ -17,6 +17,6 @@ path = "../day_1"
 [dev-dependencies]
 criterion = "0.3.3"
 
-#[[bench]]
-#name = "day5"
-#harness = false
+[[bench]]
+name = "day5"
+harness = false
