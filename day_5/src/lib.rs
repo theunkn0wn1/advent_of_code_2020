@@ -76,12 +76,11 @@ fn parse_col(line: &str) -> u32 {
     range_maximum
 }
 
-pub fn solve_p1(data: &Vec<String>) -> anyhow::Result<()> {
+pub fn solve_p1(data: &Vec<String>) -> Option<u32> {
     let result = data.iter()
         .map(|row| seat::Seat::new(&row))
         .map(|ticket| ticket.id).max().expect("why is this none?");
-    println!("result := {:?}", result);
-    Ok(())
+    Some(result)
 }
 
 pub fn solve_p2(data: &Vec<String>) -> Option<u32> {
