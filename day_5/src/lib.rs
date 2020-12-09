@@ -3,6 +3,7 @@ use std::collections::{HashSet};
 use once_cell::sync::Lazy;
 use itertools::Itertools;
 use std::iter::FromIterator;
+
 #[cfg(test)]
 mod tests {
     use crate::{parse_col, parse_row};
@@ -114,7 +115,7 @@ pub fn solve_p2(data: &Vec<String>) -> anyhow::Result<u32> {
     for id in intersection {
         let delta = id - previous;
         if delta != 1 {
-            println!("found delta of {} := {}", delta, id)
+            println!("found delta of {} := {}->{}", delta, previous, id)
         }
         previous = *id;
     }
