@@ -18,6 +18,7 @@ pub(crate) fn read_groups(data: &Vec<String>) -> Vec<HashSet<char>> {
     groups
 }
 
-pub(crate) fn solve_p1(groups: Vec<HashSet<char>>) -> usize {
+pub fn solve_p1(lines: &Vec<String>) -> usize {
+    let groups = read_groups(lines);
     groups.iter().map(|g| g.len()).sum()
 }
