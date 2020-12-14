@@ -4,10 +4,11 @@ use itertools::Itertools;
 
 pub(crate) fn read_groups(data: &Vec<String>) -> anyhow::Result<()>
 {
-    let groups: Vec<HashSet<char>> = data
-        .iter().filter(|s| *s != "")
-        .map(|v| HashSet::from_iter(v.chars())).collect_vec();
-    println!("groups := {:?}", groups);
+    let groups: Vec<HashSet<&String>> = data.split(|s| s == "")
+        .map(
+            |group| HashSet::from_iter(group)
+        ).collect_vec();
 
+    println!("groups := {:?}\nlen:={}", groups, groups.len());
     Ok(())
 }
