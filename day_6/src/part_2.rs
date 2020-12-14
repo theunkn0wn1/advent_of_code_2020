@@ -1,6 +1,5 @@
 use crate::part_1::read_groups;
-use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
+
 #[cfg(test)]
 mod tests {
     #[test]
@@ -14,16 +13,16 @@ mod tests {
     }
 }
 
-type GroupType = Vec<HashMap<char, HashSet<usize>>>;
 pub fn solve_p2(lines: &Vec<String>) -> usize {
     let groups = read_groups(lines);
     let mut sum = 0;
-    for group in groups{
-        for (_, total_respondents) in group.answers{
-            if total_respondents == group.total_respondents {
+    for group in groups {
+        for (_, total_respondents) in group.answers {
+            if total_respondents == group.total_respondents
+            {
                 sum += 1;
             }
         }
-    };
+    }
     sum
 }

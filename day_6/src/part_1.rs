@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 #[derive(Debug)]
 pub(crate) struct GroupResponse {
@@ -30,18 +30,20 @@ pub(crate) fn read_groups(
                 {
                     *existing += 1;
                 } else {
-                    group_struct.answers.insert(question, 1);
+                    group_struct
+                        .answers
+                        .insert(question, 1);
                 }
             }
         }
         groups.push(group_struct);
     }
 
-    println!(
-        "groups := {:?}\nlen:={}",
-        groups,
-        groups.len()
-    );
+    // println!(
+    //     "groups := {:?}\nlen:={}",
+    //     groups,
+    //     groups.len()
+    // );
     groups
 }
 

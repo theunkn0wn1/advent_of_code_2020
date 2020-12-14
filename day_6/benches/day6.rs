@@ -11,9 +11,9 @@ fn criterion_benchmark(c: &mut criterion::Criterion) {
     c.bench_function("day6 part 1 input.txt", |b| {
         b.iter(|| solve_p1(&data))
     });
-    // c.bench_function("day6 part 2 input.txt", |b| {
-    //     b.iter(|| solve_p2(&data))
-    // });
+    c.bench_function("day6 part 2 input.txt", |b| {
+        b.iter(|| solve_p2(&data))
+    });
 }
 
 criterion_group!(benches, criterion_benchmark);
